@@ -28,7 +28,6 @@
   "dependencies": {
     "@paypal/paypal-server-sdk": "^2.1.0",
     "@types/bcrypt": "^6.0.0",
-    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.0",
     "@types/helmet": "^0.0.48",
     "@types/jsonwebtoken": "^9.0.10",
