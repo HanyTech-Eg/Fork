@@ -12,10 +12,10 @@ export function ZodValadtion(result : any) {
 
 export const updateMontiorSchema  = z.object({
     name: z.string({message:"name msut be string"}).min(2,"name must be at 2 length").max(12,"name must be at max 13 length").optional(),
-    url : z.url({message: "this not a url"}).optional(),
+    url : z.string().url({message: "this not a url"}).optional(),
     checkInterval: z.number({message: "this not a number"}).optional(),
     method : z.string({message:"method must be string"}).optional(),
-    headers:z.object({message: "headers must be object"}).optional(),
+    headers: z.record(z.any(), {invalid_type_error: "headers must be object"}).optional(),
     isActive: z.boolean({message:"isActive must be boolean"}).optional(),
     isAlerts: z.boolean({message:"isAlerts must be boolean"}).optional(),
     hooks: z
