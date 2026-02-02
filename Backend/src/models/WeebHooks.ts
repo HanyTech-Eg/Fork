@@ -19,7 +19,7 @@ export interface IWebHook {
 
 const webHookSchema = new Schema<IWebHook> ({
     serivceId:{
-        type : Types.ObjectId,
+        type : Schema.Types.ObjectId,
         required: true
     },
     hooks:{
@@ -27,7 +27,7 @@ const webHookSchema = new Schema<IWebHook> ({
         required : true
     },
     userId : {
-        type : Types.ObjectId,
+        type : Schema.Types.ObjectId,
         required:true
     }
 })

@@ -30,7 +30,7 @@ export async function CheckCurrentMontiors() {
           }
         }
       ],
-       { updatePipeline: true } 
+       { upsert: true } 
     )
       await CheckUrl(data)
   })

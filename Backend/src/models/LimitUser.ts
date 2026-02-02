@@ -1,6 +1,7 @@
 
 
 import {Schema,model,Document,Types}  from "mongoose"
+import type { ObjectId } from "mongoose"
 
 
 
@@ -20,7 +21,7 @@ export interface ILimitUser {
 
 let limitUserSchema = new Schema<ILimitUser> ({
     userId:{
-        type:Types.ObjectId,
+        type:Schema.Types.ObjectId,
         required:true
     },
     alertCount : {

@@ -32,7 +32,7 @@ export interface IMontior {
 
 let montiorSchema = new Schema<IMontior>  ({
     userId : {
-        type : Types.ObjectId,
+        type : Schema.Types.ObjectId,
         ref: "User"
     },
     url : {

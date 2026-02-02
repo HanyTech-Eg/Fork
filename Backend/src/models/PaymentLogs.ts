@@ -51,7 +51,7 @@ let paymentLogSchema = new Schema<IPaymentLogs> ({
         required : true
     },
     userId: {
-        type:Types.ObjectId,
+        type:Schema.Types.ObjectId,
         required:true
     },
     message: {

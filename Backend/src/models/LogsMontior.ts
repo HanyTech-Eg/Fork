@@ -29,7 +29,7 @@ export interface ILogs {
 
 
 let logsSchema = new Schema<ILogs> ({
-    montiorId:{ type:Types.ObjectId,ref:"Montiors"},
+    montiorId:{ type:Schema.Types.ObjectId,ref:"Montiors"},
     status : String,
     httpStatus:Number,
     responseTime: Number
