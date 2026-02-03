@@ -1,4 +1,4 @@
-import paypal, { OrdersController } from "@paypal/paypal-server-sdk"
+import paypal from "@paypal/paypal-server-sdk"
 
 import type {Request,Response,NextFunction} from "express"
 
@@ -22,7 +22,7 @@ import {CheckCaptureStatus} from "../utils/Payment.js"
 
 
 
-const ordersController = new OrdersController(client);
+const ordersController = new paypal.OrdersController(client);
 
 
 

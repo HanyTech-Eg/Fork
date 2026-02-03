@@ -14,7 +14,7 @@
 
 
 
-import paypal, { OrdersController ,CheckoutPaymentIntent,OrderApplicationContextLandingPage,OrderApplicationContextUserAction} from "@paypal/paypal-server-sdk"
+import paypal from "@paypal/paypal-server-sdk"
 
 import {CreateLog} from "./PaymentLogs.js"
 
@@ -30,7 +30,7 @@ import type {IPaymentLogs} from "../models/PaymentLogs.js"
 
 import {UserHelper} from "./UserClass.js"
 
-const ordersController = new OrdersController(client);
+const ordersController = new paypal.OrdersController(client);
 
 import {Types} from "mongoose"
 
@@ -66,13 +66,13 @@ export function Upgrade(serivce : "pro" | "business") {
 
   body :{
 
-    intent: CheckoutPaymentIntent.Capture,
+    intent: paypal.CheckoutPaymentIntent.Capture,
 
     applicationContext:{
 
-      landingPage: OrderApplicationContextLandingPage.Login,
+      landingPage: paypal.OrderApplicationContextLandingPage.Login,
 
-      userAction:OrderApplicationContextUserAction.PayNow,
+      userAction:paypal.OrderApplicationContextUserAction.PayNow,
 
       returnUrl:`${frontendUrl}/payment/success`,
 
