@@ -42,16 +42,16 @@ export class MontiorHelper {
         }
     
     }
-    async CheckDuplicateNameMontior(name : string , userId : string) {
+    async CheckDuplicateNameMontior(name : string , userId : Types.ObjectId) {
         if (name) {
             let montior = await Montior.findOne({name , userId})
             if (montior) throw new AppError(400,"This montior name is used, please choose antother value")
         }
     }
-     CheckOwnerMontior(montiorUserId : Types.ObjectId,userId : string) {
-       if (montiorUserId.toString() != userId) {
-            throw new AppError(403,"You not allow to update this montior")
-       }
+     CheckOwnerMontior(montiorUserId: Types.ObjectId, userId: Types.ObjectId) {
+    if (!montiorUserId.equals(userId)) {
+        throw new AppError(403, "You not allow to update this montior");
+     }
     }
     async CheckCurrentMontiors(id :  Types.ObjectId )
     {

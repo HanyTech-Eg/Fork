@@ -1,13 +1,12 @@
 import cron from "node-cron";
 import {Montior} from "../models/Montior.js";
-import {FreePlan} from "../utils/Plans.js"
 import {CheckUrl} from "../utils/CheckUrls.js"
 export async function CheckCurrentMontiors() {
  try{
   cron.schedule('*/10 * * * * *', async () => {
     let date = Date.now()
     let data = await Montior.find({checkAt:{$lt:date},isActive:true})
-   
+    console.log(data)
     let ids = data.map(d => d._id)
     let free = (10 * 1000 * 60) 
     let pro = (3 * 1000 * 60) 
@@ -30,7 +29,7 @@ export async function CheckCurrentMontiors() {
           }
         }
       ],
-       { upsert: true } 
+    
     )
       await CheckUrl(data)
   })

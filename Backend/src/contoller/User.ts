@@ -22,9 +22,7 @@ export async function CreateUser(req : Request , res: Response,next: NextFunctio
         newUser.username = username
         newUser.email = email
         await newUser.Hashpassword(password)
-        let allUsers = await User.find()
-        console.log(allUsers)
-        console.log(newUser)
+   
         let user  : any= await User.create({username:newUser.username,email:newUser.email,password:newUser.password})
 
         let token : string = newUser.CreateToken(newUser.username,user.role,user._id,user.plan)

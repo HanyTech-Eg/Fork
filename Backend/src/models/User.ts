@@ -46,7 +46,7 @@ let userSchema = new  Schema<IUser> ({
     },
     plan :{ 
       type:  String,
-      default : "free"
+      default : "business"
     }
     
 },{

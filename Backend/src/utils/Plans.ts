@@ -26,15 +26,19 @@ function CheckPlans (method : string ,
     method = method ?? T_method[0] ;
     requestTime = requestTime ?? T_requestTime ;
     checkInterval = checkInterval ?? T_checkInterval ;
-     if (currentMontiors >= T_maxMontiors)
-        {
+    console.log(T_requestTime)
+     if (currentMontiors >= T_maxMontiors) {
             throw new AppError(429,"You have reached your maximum limit")
-        }
-       if (!T_method.includes(method) || Math.floor(requestTime) > T_requestTime ||  Math.floor(checkInterval) < T_checkInterval )
-        {
-           
-            throw new AppError(400,"The data is incorrect")
-        }
+    }
+    else if (!T_method.includes(method)) {
+        throw new AppError(400,"The method is incorrect")
+    }
+    else if (Math.floor(requestTime) > T_requestTime) {
+            throw new AppError(400,"The request time is incorrect")
+    }
+    else if ( Math.floor(checkInterval) < T_checkInterval ) {
+            throw new AppError(400,"The check interval is incorrect")
+    }
 }
 
 
@@ -134,6 +138,7 @@ export class BusinessPlan implements Plans {
 
 
 export function PlanUser(plan : string,method : string,requestTime : number,checkInterval : number,currentMontiors : number,headers : Record<string,string>)  {
+    console.log(plan , "plan")
   let PlanClass =
     plan === "free" ? FreePlan : plan == "pro" ? ProPlan : BusinessPlan;
   new PlanClass(method, requestTime, checkInterval, currentMontiors, headers);

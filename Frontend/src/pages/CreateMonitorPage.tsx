@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { apiCreateMonitor, type CreateMonitorInput } from '../lib/api'
+import { apiCreateMonitor, apiGetHome, type CreateMonitorInput } from '../lib/api'
 import { getAuth, resolvePlan } from '../lib/auth'
 import { normalizePlanId, PLANS } from '../utils/plans'
 import { Seo } from '../components/Seo'
@@ -12,6 +12,15 @@ export function CreateMonitorPage() {
   useEffect(() => {
     if (!token) navigate('/login', { replace: true })
   }, [token, navigate])
+
+  // Fetch user plan from API like AppLayout
+  const [homeUser, setHomeUser] = useState<{ username: string; plan: string } | null>(null)
+  useEffect(() => {
+    if (!token) return
+    apiGetHome().then(data => {
+      if (data.userData) setHomeUser(data.userData)
+    }).catch(() => {})
+  }, [token])
 
   const [url, setUrl] = useState('')
   const [name, setName] = useState('')
@@ -36,7 +45,7 @@ export function CreateMonitorPage() {
     return Object.keys(out).length ? out : undefined
   }, [headersText])
 
-  const planId = normalizePlanId(resolvePlan())
+  const planId = normalizePlanId(homeUser?.plan ?? resolvePlan())
   const canUseHooks = planId === 'pro' || planId === 'business'
   const [hookName, setHookName] = useState('')
   const [hookUrl, setHookUrl] = useState('')
