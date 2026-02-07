@@ -30,13 +30,15 @@ async function startServer() {
   app.use(express.json())
   app.use((helmet as any)());
 
-  let corsOptions = {
-    origin:"*",
-    methods: ["GET", "POST", "PUT", "DELETE","PATCH"],
-  }
+let corsOptions = {
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+  preflightContinue: false,
+  optionsSuccessStatus: 204
+};
 
-  app.use(cors(corsOptions))
-
+app.use(cors(corsOptions));
   //Middlewares
   app.use(CheckToken)
 
